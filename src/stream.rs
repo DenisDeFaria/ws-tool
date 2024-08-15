@@ -1,5 +1,5 @@
 #[cfg(feature = "sync")]
-mod blocking {
+pub mod blocking {
     use std::{
         io::{BufReader, BufWriter, Read, Write},
         net::TcpStream,
@@ -12,7 +12,7 @@ mod blocking {
     impl<S: Read + Write> RW for S {}
 
     #[cfg(any(feature = "sync_tls_rustls", feature = "sync_tls_native"))]
-    mod split {
+    pub mod split {
         use std::{
             io::{ErrorKind, Read, Write},
             sync::{Arc, Mutex},
@@ -95,6 +95,8 @@ mod blocking {
             }
         }
     }
+
+    pub mod split::{ReadHalf, WriteHalf};
 
     macro_rules! def {
         ($name:ident, $raw:ty, $rustls:ty, $native:ty, $doc:literal) => {
@@ -358,6 +360,8 @@ mod blocking {
             )
         }
     }
+
+
 }
 
 #[cfg(feature = "sync")]
