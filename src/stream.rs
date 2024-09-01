@@ -96,7 +96,7 @@ pub mod blocking {
         }
     }
 
-    pub mod split::{ReadHalf, WriteHalf};
+    pub use split::{ReadHalf, WriteHalf};
 
     macro_rules! def {
         ($name:ident, $raw:ty, $rustls:ty, $native:ty, $doc:literal) => {
